@@ -45,6 +45,12 @@ public class UserServiceImpl implements UserDetailsService, UserService
                 .orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
     }
     
+    @Override
+    public User findUserByName(String name)
+    {
+        return userrepos.findByUsername(name);
+    }
+    
     public List<User> findAll()
     {
         List<User> list = new ArrayList<>();

@@ -19,4 +19,44 @@ public class Todo
     @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties("todos")
     private User user;
+    
+    public Todo()
+    {
+    }
+    
+    public Todo(String description, User user)
+    {
+        this.description = description;
+        this.user = user;
+    }
+    
+    public long getTodoid()
+    {
+        return todoid;
+    }
+    
+    public void setTodoid(long todoid)
+    {
+        this.todoid = todoid;
+    }
+    
+    public String getDescription()
+    {
+        return description;
+    }
+    
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+    
+    public User getUser()
+    {
+        return user;
+    }
+    
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
 }
