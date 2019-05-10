@@ -15,7 +15,7 @@ public interface UserService {
     
     void delete(long id);
     
-    User save(User user);
+    User save(User user, String password);
     
     User update(User user, long id);
 }

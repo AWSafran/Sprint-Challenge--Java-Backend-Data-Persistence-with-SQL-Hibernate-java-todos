@@ -73,10 +73,11 @@ public class UserServiceImpl implements UserDetailsService, UserService
     
     @Transactional
     @Override
-    public User save(User user)
+    public User save(User user, String password)
     {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
+        newUser.setPasswordAlreadyEncrypted(password);
         
         ArrayList<UserRoles> newRoles = new ArrayList<>();
         for (UserRoles ur : user.getUserRoles())

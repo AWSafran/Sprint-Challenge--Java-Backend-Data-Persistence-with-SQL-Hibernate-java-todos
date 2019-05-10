@@ -102,6 +102,11 @@ public class User extends Auditable
         this.userRoles = userRoles;
     }
     
+    public void setPasswordAlreadyEncrypted(String encryptedPassword)
+    {
+        this.password = encryptedPassword;
+    }
+    
     public List<SimpleGrantedAuthority> getAuthority()
     {
         List<SimpleGrantedAuthority> rtnList = new ArrayList<>();
