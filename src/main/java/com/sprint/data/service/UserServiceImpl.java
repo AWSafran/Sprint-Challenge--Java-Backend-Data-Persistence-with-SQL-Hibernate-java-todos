@@ -28,6 +28,8 @@ public class UserServiceImpl implements UserDetailsService, UserService
     @Autowired
     private RoleRepository rolerepos;
     
+    
+    
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
@@ -48,7 +50,11 @@ public class UserServiceImpl implements UserDetailsService, UserService
     @Override
     public User findUserByName(String name)
     {
-        return userrepos.findByUsername(name);
+        if (userrepos.findByUsername(name) != null)
+        {
+            return userrepos.findByUsername(name);
+        }
+        return null;
     }
     
     public List<User> findAll()

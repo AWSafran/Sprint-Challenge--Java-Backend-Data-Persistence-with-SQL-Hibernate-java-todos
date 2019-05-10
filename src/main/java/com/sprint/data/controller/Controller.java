@@ -4,7 +4,9 @@ import com.sprint.data.model.Todo;
 import com.sprint.data.model.User;
 import com.sprint.data.service.TodoService;
 import com.sprint.data.service.UserService;
+import com.sprint.data.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +22,7 @@ import java.util.List;
 public class Controller
 {
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
     
     @Autowired
     private TodoService todoService;
@@ -30,10 +32,15 @@ public class Controller
     @GetMapping(value = "/users/mine", produces = {"application/json"})
     private ResponseEntity<?> getActiveUser(Authentication authentication)
     {
+
         String currentUserName = authentication.getName();
         System.out.println(currentUserName);
         
-        return new ResponseEntity<>(userService.findUserByName(currentUserName), HttpStatus.OK);
+        User thisUser = userService.findUserByName(currentUserName);
+//
+//        System.out.println(thisUser.toString());
+        
+        return new ResponseEntity<>("hi", HttpStatus.OK);
     }
     
     // http://localhost:2019/users

@@ -54,13 +54,13 @@ public class SeedData implements CommandLineRunner
         rolerepos.save(r3);
         rolerepos.save(r4);
         
-        User u1 = new User("zoodata", "password", zoodata);
+        User u1 = new User("userone", "password", zoodata);
         
         User u2 = new User("admin", "password", admins);
         
-        User u3 = new User("animaldata", "password", animaldata);
+        User u3 = new User("usertwo", "password", animaldata);
         
-        User u4 = new User("mgr", "password", mgr);
+        User u4 = new User("userthree", "password", mgr);
         
         
         
