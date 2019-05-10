@@ -27,4 +27,11 @@ public class TodoServiceImpl implements TodoService
             throw new EntityNotFoundException();
         }
     }
+    
+    @Transactional
+    @Override
+    public void save(Todo todo)
+    {
+        todoRepository.save(todo);
+    }
 }

@@ -41,10 +41,25 @@ public class Controller
     public ResponseEntity<?> addUser(@RequestBody User newUser) throws URISyntaxException
     {
 //        newUser = userService.save(newUser, newUser.getPassword());
-        //Still need to figure out how to add userRoles to this. will come back
+        // todo Still need to figure out how to add userRoles to this. will come back
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
     
+    // http://localhost:2019/users/todo
+    // add a 2do to the assigned user -- this is tested in postman as a string with no quotes/braces
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PostMapping(value = "/users/todo/{userid}", produces = {"application/json"}, consumes = {"application/json"})
+    public ResponseEntity<?> addTodo(@RequestBody String description, @PathVariable long userid)
+    {
+        Todo newTodo = new Todo(description, userService.findUserById(userid));
+    
+        todoService.save(newTodo);
+        
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    // http://localhost:2019/todos/todoid/9
+    // update the description of an existing todolist item
     @PutMapping(value = "/todos/todoid/{todoid}", produces = {"application/json"}, consumes = {"application/json"})
     public ResponseEntity<?> updateTodo(@RequestBody Todo newTodo, @PathVariable long todoid)
     {
