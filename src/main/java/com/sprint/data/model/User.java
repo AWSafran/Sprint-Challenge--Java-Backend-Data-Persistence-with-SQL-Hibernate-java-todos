@@ -30,7 +30,7 @@ public class User extends Auditable
     
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties("user")
-    private List<Todo> todos
+    private List<Todo> todos;
     
     public User()
     {
