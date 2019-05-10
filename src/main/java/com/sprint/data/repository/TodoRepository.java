@@ -11,4 +11,8 @@ public interface TodoRepository extends CrudRepository<Todo, Long>
     @Modifying
     @Query(value = "UPDATE todo SET description = :newdescription WHERE todoid = :todoid", nativeQuery = true)
     void updateTodo(String newdescription, long todoid);
+    
+    @Modifying
+    @Query(value = "DELETE FROM todo WHERE todoid = :todoid", nativeQuery = true)
+    void deleteTodo(long todoid);
 }

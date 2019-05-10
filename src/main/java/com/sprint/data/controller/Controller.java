@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping
@@ -66,5 +68,26 @@ public class Controller
         Todo updatedTodo = todoService.updateTodo(newTodo, todoid);
         
         return new ResponseEntity<>(updatedTodo, HttpStatus.OK);
+    }
+    
+    // http://localhost:2019/users/userid/{userid}
+    // delete a user and associated 2dos
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @DeleteMapping("/users/userid/{userid}")
+    public ResponseEntity<?> deleteUser(@PathVariable long userid)
+    {
+        List<Todo> todosFromUser = userService.findUserById(userid).getTodos();
+        if(todosFromUser.size() != 0)
+        {
+            for(Todo t : todosFromUser)
+            {
+                todoService.delete(t);
+            }
+            
+        }
+    
+        userService.delete(userid);
+        
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
